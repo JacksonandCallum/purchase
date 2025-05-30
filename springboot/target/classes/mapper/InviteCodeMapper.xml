@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.InvitationCodeMapper">
+
+    <sql id="Base_Column_List">
+        id,code,generator,status,create_time,expire_time,use_count,used_count,user_type,bind_email
+    </sql>
+
+    <select id="selectAll" resultType="com.example.entity.InvitationCode">
+        select
+        <include refid="Base_Column_List" />
+        from invitation_code
+        <where>
+            <if test="id != null"> and id= #{id}</if>
+            <if test="code != null"> and code = #{code}</if>
+            <if test="generator != null"> and generator = #{generator}</if>
+            <if test="status != null"> and status = #{status}</if>
+            <if test="createTime != null"> and create_time = #{createTime}</if>
+            <if test="expireTime != null"> and expire_time = #{expireTime}</if>
+            <if test="useCount != null"> and use_count = #{useCount}</if>
+            <if test="usedCount != null"> and used_count = #{usedCount}</if>
+            <if test="userType != null"> and user_type = #{userType}</if>
+            <if test="bindEmail != null"> and bind_email like concat('%', #{bindEmail}, '%')</if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="selectById" resultType="com.example.entity.InvitationCode">
+        select
+        <include refid="Base_Column_List" />
+        from invitation_code
+        where id = #{id}
+    </select>
+
+    <delete id="deleteById">
+        delete from invitation_code
+        where  id = #{id}
+    </delete>
+
+<!--    <insert id="insert" parameterType="com.example.entity.InvitationCode" useGeneratedKeys="true">-->
+<!--        insert into invitation_code-->
+<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--            <if test="id != null">id,</if>-->
+<!--            <if test="code != null">code,</if>-->
+<!--            <if test="generator != null">generator,</if>-->
+<!--            <if test="status != null">status,</if>-->
+<!--            <if test="createTime != null">create_time,</if>-->
+<!--            <if test="expireTime != null">expire_time,</if>-->
+<!--            <if test="useCount != null">use_count,</if>-->
+<!--            <if test="usedCount != null">used_count,</if>-->
+<!--            <if test="userType != null">user_type,</if>-->
+<!--            <if test="bindEmail != null">bind_email,</if>-->
+<!--        </trim>-->
+<!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--            <if test="id != null">#{id},</if>-->
+<!--            <if test="code != null">#{code},</if>-->
+<!--            <if test="generator != null">#{generator},</if>-->
+<!--            <if test="status != null">#{status},</if>-->
+<!--            <if test="createTime != null">#{createTime},</if>-->
+<!--            <if test="expireTime != null">#{expireTime},</if>-->
+<!--            <if test="useCount != null">#{useCount},</if>-->
+<!--            <if test="usedCount != null">#{usedCount},</if>-->
+<!--            <if test="userType != null">#{userType},</if>-->
+<!--            <if test="bindEmail != null">#{bindEmail},</if>-->
+<!--        </trim>-->
+<!--    </insert>-->
+
+<!--    <update id="updateById" parameterType="com.example.entity.InvitationCode">-->
+<!--        update invitation_code-->
+<!--        <set>-->
+<!--            <if test="code != null">-->
+<!--                code = #{code},-->
+<!--            </if>-->
+<!--            <if test="generator != null">-->
+<!--                generator = #{generator},-->
+<!--            </if>-->
+<!--            <if test="status != null">-->
+<!--                status = #{status},-->
+<!--            </if>-->
+<!--            <if test="createTime != null">-->
+<!--                create_time = #{createTime},-->
+<!--            </if>-->
+<!--            <if test="expireTime != null">-->
+<!--                expire_time = #{expireTime},-->
+<!--            </if>-->
+<!--            <if test="useCount != null">-->
+<!--                use_count = #{useCount},-->
+<!--            </if>-->
+<!--            <if test="usedCount != null">-->
+<!--                used_count = #{usedCount},-->
+<!--            </if>-->
+<!--            <if test="userType != null">-->
+<!--                user_type = #{userType},-->
+<!--            </if>-->
+<!--            <if test="bindEmail != null">-->
+<!--                bind_email = #{bindEmail},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        where id = #{id}-->
+<!--    </update>-->
+
+</mapper>

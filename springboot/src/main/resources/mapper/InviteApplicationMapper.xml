@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.InvitationApplicationMapper">
+
+    <sql id="Base_Column_List">
+        id,applicant_email,apply_reason,status,invite_code,reviewer_id,review_comment,created_at,updated_at
+    </sql>
+
+    <select id="selectAll" resultType="com.example.entity.InvitationApplication">
+        select
+            ia.id,
+            ia.applicant_email,
+            ia.apply_reason,
+            ia.status,
+            ia.invite_code,
+            ia.reviewer_id,
+            ia.review_comment,
+            ia.created_at,
+            ia.updated_at,
+            admin.name as reviewerName
+        from invite_application ia
+        left join admin
+            on ia.reviewer_id = admin.id
+        <where>
+            <if test="id != null"> and ia.id= #{id}</if>
+            <if test="applicantEmail != null"> and ia.applicant_email = #{applicantEmail}</if>
+            <if test="applyReason != null"> and ia.apply_reason = #{applyReason}</if>
+            <if test="status != null"> and ia.status = #{status}</if>
+            <if test="inviteCode != null"> and ia.invite_code = #{inviteCode}</if>
+            <if test="reviewerId != null"> and ia.reviewer_id = #{reviewerId}</if>
+            <if test="reviewComment != null"> and ia.review_comment = #{reviewComment}</if>
+            <if test="createdAt != null"> and ia.created_at = #{createdAt}</if>
+            <if test="updatedAt != null"> and ia.updated_at = #{updatedAt}</if>
+        </where>
+    </select>
+
+    <delete id="deleteById">
+        delete from invite_application
+        where  id = #{id}
+    </delete>
+
+    <update id="updateById" parameterType="com.example.entity.InvitationApplication">
+        update invite_application
+        <set>
+            <if test="applicantEmail != null">
+                applicant_email = #{applicantEmail},
+            </if>
+            <if test="applyReason != null">
+                apply_reason = #{applyReason},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="inviteCode != null">
+                invite_code = #{inviteCode},
+            </if>
+            <if test="reviewerId != null">
+                reviewer_id = #{reviewerId},
+            </if>
+            <if test="reviewComment != null">
+                review_comment = #{reviewComment},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

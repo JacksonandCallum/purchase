@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.Data_MatchingMapper">
+
+    <sql id="Base_Column_List">
+        id,SKU,MSKU,FNSKU,product_name,attribute,factory,cartons_number
+    </sql>
+
+    <select id="selectAll" resultType="com.example.entity.Data_Matching">
+        select
+        <include refid="Base_Column_List" />
+        from data_matching
+        <where>
+            <if test="id != null"> and id= #{id}</if>
+            <if test="sku != null"> and SKU like concat('%', #{sku}, '%')</if>
+            <if test="msku != null"> and MSKU= #{msku}</if>
+            <if test="fnsku != null"> and FNSKU= #{fnsku}</if>
+            <if test="productName != null"> and product_name= #{productName}</if>
+            <if test="attribute != null"> and attribute= #{attribute}</if>
+            <if test="factory != null"> and factory= #{factory}</if>
+            <if test="cartonsNumber != null"> and cartons_number= #{cartonsNumber}</if>
+        </where>
+    </select>
+
+    <select id="selectById" resultType="com.example.entity.Data_Matching">
+        select
+        <include refid="Base_Column_List" />
+        from data_matching
+        where id = #{id}
+    </select>
+    <select id="findAll" resultType="com.example.entity.Data_Matching">
+        select
+        <include refid="Base_Column_List" />
+        from data_matching
+        <where>
+            <if test="id != null"> and id= #{id}</if>
+            <if test="sku != null"> and SKU like concat('%', #{sku}, '%')</if>
+            <if test="msku != null"> and MSKU= #{msku}</if>
+            <if test="fnsku != null"> and FNSKU= #{fnsku}</if>
+            <if test="productName != null"> and product_name= #{productName}</if>
+            <if test="attribute != null"> and attribute= #{attribute}</if>
+            <if test="factory != null"> and factory= #{factory}</if>
+            <if test="cartonsNumber != null"> and cartons_number= #{cartonsNumber}</if>
+        </where>
+    </select>
+
+    <select id="selectBySku" resultType="com.example.entity.Data_Matching">
+        select
+            <include refid="Base_Column_List"></include>
+        from data_matching
+        where SKU = #{sku}
+    </select>
+
+    <delete id="deleteById">
+        delete from data_matching
+        where  id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.example.entity.Data_Matching" useGeneratedKeys="true">
+        insert into data_matching
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="sku != null">SKU,</if>
+            <if test="msku != null">MSKU,</if>
+            <if test="fnsku != null">FNSKU,</if>
+            <if test="productName != null">product_name,</if>
+            <if test="attribute != null">attribute,</if>
+            <if test="factory != null">factory,</if>
+            <if test="cartonsNumber != null">cartons_number,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="sku != null">#{sku},</if>
+            <if test="msku != null">#{msku},</if>
+            <if test="fnsku != null">#{fnsku},</if>
+            <if test="productName != null">#{productName},</if>
+            <if test="attribute != null">#{attribute},</if>
+            <if test="factory != null">#{factory},</if>
+            <if test="cartonsNumber != null">#{cartonsNumber},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.example.entity.Data_Matching">
+        update data_matching
+        <set>
+            <if test="sku != null">
+                SKU = #{sku},
+            </if>
+            <if test="msku != null">
+                MSKU = #{msku},
+            </if>
+            <if test="fnsku != null">
+                FNSKU = #{fnsku},
+            </if>
+            <if test="productName != null">
+                product_name = #{productName},
+            </if>
+            <if test="attribute != null">
+                attribute = #{attribute},
+            </if>
+            <if test="factory != null">
+                factory = #{factory},
+            </if>
+            <if test="cartonsNumber != null">
+                cartons_number = #{cartonsNumber},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>

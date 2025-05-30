@@ -1,0 +1,58 @@
+server:
+  port: 9090
+
+# 数据库配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root   #你本地的数据库用户名
+    password: 123456 #你本地的数据库密码
+    url: jdbc:mysql://localhost:3306/purchase2?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8&allowPublicKeyRetrieval=true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  redis:
+    host: localhost
+    port: 6379
+  mail:
+    host: smtp.feishu.cn
+    port: 465
+    username: info@you-ta.cn
+    password: 0Hpit99xPTK0Wavj
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.ssl.enable: true
+      mail.smtp.connectiontimeout: 5000
+      mail.smtp.timeout: 5000
+      mail.smtp.writetimeout: 5000
+      mail.smtp.ssl.trust: smtp.feishu.cn  # 信任服务器证书（避免SSL验证失败）
+  mvc:
+    dispatch-options-request: true
+
+jwt:
+  secret: your-secret-key-here-1234567890abcdef # 随机字符串，用于签名
+  access-token-expire-time: 3600000 # 访问令牌有效期（毫秒），1小时
+  refresh-token-expire-time: 259200000 # 刷新令牌有效期（毫秒），3天
+
+# 配置mybatis实体和xml映射
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+# 分页
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+feishu:
+  app-id: cli_a8a736e42f7d900e
+  app-secret: Irgze0AEenBBGGmvw7v9PeuZ8AQFW3XY
+  user-info-url: https://open.feishu.cn/open-apis/contact/v3/users
+
+ip: localhost

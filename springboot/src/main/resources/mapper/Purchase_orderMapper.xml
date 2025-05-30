@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.Purchase_orderMapper">
+
+    <sql id="Base_Column_List">
+        id,am_plan_id,auxiliary_column,purchase_order_id,procurement_status,purchasing_warehouse,product_dimension,plan_id,
+         product_name,SKU,shop,procurement_volume,am_track_id,procurement_warehouse_details,pending_arrival_quantity,expected_delivery_time,arrival_quantity,
+          auxiliary_column1,final_purchase_order_id,new_arrivals_quantity,actual_total_arrival_quantity,notes
+    </sql>
+
+    <select id="selectAll" resultType="com.example.entity.Purchase_order">
+        select
+        <include refid="Base_Column_List" />
+        from purchase_order
+        <where>
+            <if test="id != null"> and id= #{id}</if>
+            <if test="AmPlanId != null"> and am_plan_id = #{AmPlanId}</if>
+            <if test="AuxiliaryColumn != null"> and auxiliary_column = #{AuxiliaryColumn}</if>
+            <if test="PurchaseOrderId != null"> and purchase_order_id = #{PurchaseOrderId}</if>
+            <if test="ProcurementStatus != null"> and procurement_status = #{ProcurementStatus}</if>
+            <if test="PurchasingWarehouse != null"> and purchasing_warehouse = #{PurchasingWarehouse}</if>
+            <if test="ProductDimension != null"> and product_dimension = #{ProductDimension}</if>
+            <if test="PlanId != null"> and plan_id = #{PlanId}</if>
+            <if test="ProductName != null"> and product_name = #{ProductName}</if>
+            <if test="sku != null"> and SKU = #{sku}</if>
+            <if test="shop != null"> and shop = #{shop}</if>
+            <if test="ProcurementVolume != null"> and procurement_volume = #{ProcurementVolume}</if>
+            <if test="AmTrackId != null"> and am_track_id = #{AmTrackId}</if>
+            <if test="ProcurementWarehouseDetails != null"> and procurement_warehouse_details = #{ProcurementWarehouseDetails}</if>
+            <if test="PendingArrivalQuantity != null"> and pending_arrival_quantity = #{PendingArrivalQuantity}</if>
+            <if test="ExpectedDeliveryTime != null"> and expected_delivery_time = #{ExpectedDeliveryTime}</if>
+            <if test="ArrivalQuantity != null"> and arrival_quantity = #{ArrivalQuantity}</if>
+            <if test="AuxiliaryColumn1 != null"> and auxiliary_column1 = #{AuxiliaryColumn1}</if>
+            <if test="FinalPurchaseOrderId != null"> and final_purchase_order_id = #{FinalPurchaseOrderId}</if>
+            <if test="NewArrivalsQuantity != null"> and new_arrivals_quantity = #{NewArrivalsQuantity}</if>
+            <if test="ActualTotalArrivalQuantity != null"> and actual_total_arrival_quantity = #{ActualTotalArrivalQuantity}</if>
+            <if test="notes != null"> and notes = #{notes}</if>
+        </where>
+    </select>
+
+    <select id="selectById" resultType="com.example.entity.Purchase_order">
+        select
+        <include refid="Base_Column_List" />
+        from purchase_order
+        where id = #{id}
+    </select>
+
+    <select id="findAll" resultType="com.example.entity.Purchase_order">
+        select
+        <include refid="Base_Column_List" />
+        from purchase_order
+    </select>
+
+    <delete id="deleteById">
+        delete from purchase_order
+        where  id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.example.entity.Purchase_order" useGeneratedKeys="true">
+        insert into purchase_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="AmPlanId != null">am_plan_id,</if>
+            <if test="AuxiliaryColumn != null">auxiliary_column,</if>
+            <if test="PurchaseOrderId != null">purchase_order_id,</if>
+            <if test="ProcurementStatus != null">procurement_status,</if>
+            <if test="PurchasingWarehouse != null">purchasing_warehouse,</if>
+            <if test="ProductDimension != null">product_dimension,</if>
+            <if test="PlanId != null">plan_id,</if>
+            <if test="ProductName != null">product_name,</if>
+            <if test="sku != null">SKU,</if>
+            <if test="shop != null">shop,</if>
+            <if test="ProcurementVolume != null">procurement_volume,</if>
+            <if test="AmTrackId != null">am_track_id,</if>
+            <if test="ProcurementWarehouseDetails != null">procurement_warehouse_details,</if>
+            <if test="PendingArrivalQuantity != null">pending_arrival_quantity,</if>
+            <if test="ExpectedDeliveryTime != null">expected_delivery_time,</if>
+            <if test="ArrivalQuantity != null">arrival_quantity,</if>
+            <if test="AuxiliaryColumn1 != null">auxiliary_column1,</if>
+            <if test="FinalPurchaseOrderId != null">final_purchase_order_id,</if>
+            <if test="NewArrivalsQuantity != null">new_arrivals_quantity,</if>
+            <if test="ActualTotalArrivalQuantity != null">actual_total_arrival_quantity,</if>
+            <if test="notes != null">notes,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="AmPlanId != null">#{AmPlanId},</if>
+            <if test="AuxiliaryColumn != null">#{AuxiliaryColumn},</if>
+            <if test="PurchaseOrderId != null">#{PurchaseOrderId},</if>
+            <if test="ProcurementStatus != null">#{ProcurementStatus},</if>
+            <if test="PurchasingWarehouse != null">#{PurchasingWarehouse},</if>
+            <if test="ProductDimension != null">#{ProductDimension},</if>
+            <if test="PlanId != null">#{PlanId},</if>
+            <if test="ProductName != null">#{ProductName},</if>
+            <if test="sku != null">#{sku},</if>
+            <if test="shop != null">#{shop},</if>
+            <if test="ProcurementVolume != null">#{ProcurementVolume},</if>
+            <if test="AmTrackId != null">#{AmTrackId},</if>
+            <if test="ProcurementWarehouseDetails != null">#{ProcurementWarehouseDetails},</if>
+            <if test="PendingArrivalQuantity != null">#{PendingArrivalQuantity},</if>
+            <if test="ExpectedDeliveryTime != null"> #{ExpectedDeliveryTime},</if>
+            <if test="ArrivalQuantity != null">#{ArrivalQuantity},</if>
+            <if test="AuxiliaryColumn1 != null">#{AuxiliaryColumn1},</if>
+            <if test="FinalPurchaseOrderId != null">#{FinalPurchaseOrderId},</if>
+            <if test="NewArrivalsQuantity != null">#{NewArrivalsQuantity},</if>
+            <if test="ActualTotalArrivalQuantity != null">#{ActualTotalArrivalQuantity},</if>
+            <if test="notes != null">#{notes},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.example.entity.Purchase_order">
+        update purchase_order
+        <set>
+            <if test="AmPlanId != null">
+                am_plan_id = #{AmPlanId},
+            </if>
+            <if test="AuxiliaryColumn != null">
+                auxiliary_column = #{AuxiliaryColumn},
+            </if>
+            <if test="PurchaseOrderId != null">
+                purchase_order_id = #{PurchaseOrderId},
+            </if>
+            <if test="ProcurementStatus != null">
+                procurement_status = #{ProcurementStatus},
+            </if>
+            <if test="PurchasingWarehouse != null">
+                purchasing_warehouse = #{PurchasingWarehouse},
+            </if>
+            <if test="ProductDimension != null">
+                product_dimension = #{ProductDimension},
+            </if>
+            <if test="PlanId != null">
+                plan_id = #{PlanId},
+            </if>
+            <if test="ProductName != null">
+                product_name = #{ProductName},
+            </if>
+            <if test="sku != null">
+                SKU = #{sku},
+            </if>
+            <if test="shop != null">
+                shop = #{shop},
+            </if>
+            <if test="ProcurementVolume != null">
+                procurement_volume = #{ProcurementVolume},
+            </if>
+            <if test="AmTrackId != null">
+                am_track_id = #{AmTrackId},
+            </if>
+            <if test="ProcurementWarehouseDetails != null">
+                procurement_warehouse_details = #{ProcurementWarehouseDetails},
+            </if>
+            <if test="PendingArrivalQuantity != null">
+                pending_arrival_quantity = #{PendingArrivalQuantity},
+            </if>
+            <if test="ExpectedDeliveryTime != null">
+                expected_delivery_time = #{ExpectedDeliveryTime},
+            </if>
+            <if test="ArrivalQuantity != null">
+                arrival_quantity = #{ArrivalQuantity},
+            </if>
+            <if test="AuxiliaryColumn1 != null">
+                auxiliary_column1 = #{AuxiliaryColumn1},
+            </if>
+            <if test="FinalPurchaseOrderId != null">
+                final_purchase_order_id = #{FinalPurchaseOrderId},
+            </if>
+            <if test="NewArrivalsQuantity != null">
+                new_arrivals_quantity = #{NewArrivalsQuantity},
+            </if>
+            <if test="ActualTotalArrivalQuantity != null">
+                actual_total_arrival_quantity = #{ActualTotalArrivalQuantity},
+            </if>
+            <if test="notes != null">
+                notes = #{notes},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="batchUpdateNewArrivals">
+        <foreach collection="list" item="item" separator=";">
+            UPDATE purchase_order
+            SET new_arrivals_quantity = #{item.newArrivalsQuantity}
+            WHERE id = #{item.id}
+        </foreach>
+    </update>
+
+    <update id="updateNewArrivalsByAuxColumn">
+        UPDATE purchase_order
+        SET new_arrivals_quantity = #{quantity}
+        WHERE auxiliary_column = #{auxColumn}
+          AND auxiliary_column IS NOT NULL
+          AND auxiliary_column != ''
+    </update>
+
+</mapper>

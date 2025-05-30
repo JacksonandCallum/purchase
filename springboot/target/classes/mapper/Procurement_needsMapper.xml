@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.Procurement_needsMapper">
+
+    <sql id="Base_Column_List">
+        id,input_date,plan_id,plan_auxiliary_id,SKU,product_name,attribute,expected_arrival_time,
+         factory,warehouse,shop,purchase_volume,carton_number,has_full,has_new,has_urgent,operation_remark,
+          delivery_date_response,delivery_date_response_feishu,ordered_quantity,pending_arrival_quantity,
+          received_quantity,remaining_unprocured_quantity,has_full_procurement,has_all_items_arrived,
+          purchase_notes,deliver_or_product_time,expect_arrival_time_countdown
+    </sql>
+
+    <select id="selectAll" resultType="com.example.entity.Procurement_needs">
+        select
+        <include refid="Base_Column_List" />
+        from procurement_needs
+        <where>
+            <if test="id != null"> and id= #{id}</if>
+            <if test="inputDate != null"> and input_date = #{inputDate}</if>
+            <if test="planId != null"> and plan_id = #{planId}</if>
+            <if test="planAuxiliaryId != null"> and plan_auxiliary_id = #{planAuxiliaryId}</if>
+            <if test="sku != null"> and SKU like concat('%', #{sku}, '%')</if>
+            <if test="productName != null"> and product_name = #{productName}</if>
+            <if test="attribute != null"> and attribute = #{attribute}</if>
+            <if test="expectedArrivalTime != null"> and expected_arrival_time = #{expectedArrivalTime}</if>
+            <if test="factory != null"> and factory = #{factory}</if>
+            <if test="warehouse != null"> and warehouse = #{warehouse}</if>
+            <if test="shop != null"> and shop = #{shop}</if>
+            <if test="purchaseVolume != null"> and purchase_volume = #{purchaseVolume}</if>
+            <if test="cartonNumber != null"> and carton_number = #{cartonNumber}</if>
+            <if test="hasFull != null"> and has_full = #{hasFull}</if>
+            <if test="hasNew != null"> and has_new = #{hasNew}</if>
+            <if test="hasUrgent != null"> and has_urgent = #{hasUrgent}</if>
+            <if test="operationRemark != null"> and operation_remark = #{operationRemark}</if>
+            <if test="deliveryDateResponse != null"> and delivery_date_response = #{deliveryDateResponse}</if>
+            <if test="deliveryDateResponseFeishu != null"> and delivery_date_response_feishu = #{deliveryDateResponseFeishu}</if>
+            <if test="orderedQuantity != null"> and ordered_quantity = #{orderedQuantity}</if>
+            <if test="pendingArrivalQuantity != null"> and pending_arrival_quantity = #{pendingArrivalQuantity}</if>
+            <if test="receivedQuantity != null"> and received_quantity = #{receivedQuantity}</if>
+            <if test="remainingUnprocuredQuantity != null"> and remaining_unprocured_quantity = #{remainingUnprocuredQuantity}</if>
+            <if test="hasFullProcurement != null"> and has_full_procurement = #{hasFullProcurement}</if>
+            <if test="hasAllItemsArrived != null"> and has_all_items_arrived = #{hasAllItemsArrived}</if>
+            <if test="purchaseNotes != null"> and purchase_notes = #{purchaseNotes}</if>
+            <if test="deliverOrProductTime != null"> and deliver_or_product_time = #{deliverOrProductTime}</if>
+            <if test="expectArrivalTimeCountdown != null"> and expect_arrival_time_countdown = #{expectArrivalTimeCountdown}</if>
+        </where>
+    </select>
+
+    <select id="selectById" resultType="com.example.entity.Procurement_needs">
+        select
+        <include refid="Base_Column_List" />
+        from procurement_needs
+        where id = #{id}
+    </select>
+
+    <select id="findAll" resultType="com.example.entity.Procurement_needs">
+        select
+        <include refid="Base_Column_List" />
+        from procurement_needs
+    </select>
+
+    <delete id="deleteById">
+        delete from procurement_needs
+        where  id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.example.entity.Procurement_needs" useGeneratedKeys="true">
+        insert into procurement_needs
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="inputDate != null">input_date,</if>
+            <if test="planId != null">plan_id,</if>
+            <if test="planAuxiliaryId != null">plan_auxiliary_id,</if>
+            <if test="sku != null">SKU,</if>
+            <if test="productName != null">product_name,</if>
+            <if test="attribute != null">attribute,</if>
+            <if test="expectedArrivalTime != null">expected_arrival_time,</if>
+            <if test="factory != null">factory,</if>
+            <if test="warehouse != null">warehouse,</if>
+            <if test="shop != null">shop,</if>
+            <if test="purchaseVolume != null">purchase_volume,</if>
+            <if test="cartonNumber != null">carton_number,</if>
+            <if test="hasFull != null">has_full,</if>
+            <if test="hasNew != null">has_new,</if>
+            <if test="hasUrgent != null">has_urgent,</if>
+            <if test="operationRemark != null">operation_remark,</if>
+            <if test="deliveryDateResponse != null">delivery_date_response,</if>
+            <if test="deliveryDateResponseFeishu != null">delivery_date_response_feishu,</if>
+            <if test="orderedQuantity != null">ordered_quantity,</if>
+            <if test="pendingArrivalQuantity != null">pending_arrival_quantity,</if>
+            <if test="receivedQuantity != null">received_quantity,</if>
+            <if test="remainingUnprocuredQuantity != null">remaining_unprocured_quantity,</if>
+            <if test="hasFullProcurement != null">has_full_procurement,</if>
+            <if test="hasAllItemsArrived != null">has_all_items_arrived,</if>
+            <if test="purchaseNotes != null">purchase_notes,</if>
+            <if test="deliverOrProductTime != null">deliver_or_product_time,</if>
+            <if test="expectArrivalTimeCountdown != null">expect_arrival_time_countdown,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="inputDate != null">#{inputDate},</if>
+            <if test="planId != null">#{planId},</if>
+            <if test="planAuxiliaryId != null">#{planAuxiliaryId},</if>
+            <if test="sku != null">#{sku},</if>
+            <if test="productName != null">#{productName},</if>
+            <if test="attribute != null">#{attribute},</if>
+            <if test="expectedArrivalTime != null">#{expectedArrivalTime},</if>
+            <if test="factory != null">#{factory},</if>
+            <if test="warehouse != null">#{warehouse},</if>
+            <if test="shop != null">#{shop},</if>
+            <if test="purchaseVolume != null">#{purchaseVolume},</if>
+            <if test="cartonNumber != null">#{cartonNumber},</if>
+            <if test="hasFull != null">#{hasFull},</if>
+            <if test="hasNew != null">#{hasNew},</if>
+            <if test="hasUrgent != null">#{hasUrgent},</if>
+            <if test="operationRemark != null">#{operationRemark},</if>
+            <if test="deliveryDateResponse != null">#{deliveryDateResponse},</if>
+            <if test="deliveryDateResponseFeishu != null">#{deliveryDateResponseFeishu},</if>
+            <if test="orderedQuantity != null">#{orderedQuantity},</if>
+            <if test="pendingArrivalQuantity != null">#{pendingArrivalQuantity},</if>
+            <if test="receivedQuantity != null">#{receivedQuantity},</if>
+            <if test="remainingUnprocuredQuantity != null">#{remainingUnprocuredQuantity},</if>
+            <if test="hasFullProcurement != null">#{hasFullProcurement},</if>
+            <if test="hasAllItemsArrived != null">#{hasAllItemsArrived},</if>
+            <if test="purchaseNotes != null">#{purchaseNotes},</if>
+            <if test="deliverOrProductTime != null">#{deliverOrProductTime},</if>
+            <if test="expectArrivalTimeCountdown != null">#{expectArrivalTimeCountdown},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.example.entity.Procurement_needs">
+        update procurement_needs
+        <set>
+            <if test="inputDate != null">
+                input_date = #{inputDate},
+            </if>
+            <if test="planId != null">
+                plan_id = #{planId},
+            </if>
+            <if test="planAuxiliaryId != null">
+                plan_auxiliary_id = #{planAuxiliaryId},
+            </if>
+            <if test="sku != null">
+                SKU = #{sku},
+            </if>
+            <if test="productName != null">
+                product_name = #{productName},
+            </if>
+            <if test="attribute != null">
+                attribute = #{attribute},
+            </if>
+            <if test="expectedArrivalTime != null">
+                expected_arrival_time = #{expectedArrivalTime},
+            </if>
+            <if test="factory != null">
+                factory = #{factory},
+            </if>
+            <if test="warehouse != null">
+                warehouse = #{warehouse},
+            </if>
+            <if test="shop != null">
+                shop = #{shop},
+            </if>
+            <if test="purchaseVolume != null">
+                purchase_volume = #{purchaseVolume},
+            </if>
+            <if test="cartonNumber != null">
+                carton_number = #{cartonNumber},
+            </if>
+            <if test="hasFull != null">
+                has_full = #{hasFull},
+            </if>
+            <if test="hasNew != null">
+                has_new = #{hasNew},
+            </if>
+            <if test="hasUrgent != null">
+                has_urgent = #{hasUrgent},
+            </if>
+            <if test="operationRemark != null">
+                operation_remark = #{operationRemark},
+            </if>
+            <if test="deliveryDateResponse != null">
+                delivery_date_response = #{deliveryDateResponse},
+            </if>
+            <if test="deliveryDateResponseFeishu != null">
+                delivery_date_response_feishu = #{deliveryDateResponseFeishu},
+            </if>
+            <if test="orderedQuantity != null">
+                ordered_quantity = #{orderedQuantity},
+            </if>
+            <if test="pendingArrivalQuantity != null">
+                pending_arrival_quantity = #{pendingArrivalQuantity},
+            </if>
+            <if test="receivedQuantity != null">
+                received_quantity = #{receivedQuantity},
+            </if>
+            <if test="remainingUnprocuredQuantity != null">
+                remaining_unprocured_quantity = #{remainingUnprocuredQuantity},
+            </if>
+            <if test="hasFullProcurement != null">
+                has_full_procurement = #{hasFullProcurement},
+            </if>
+            <if test="hasAllItemsArrived != null">
+                has_all_items_arrived = #{hasAllItemsArrived},
+            </if>
+            <if test="purchaseNotes != null">
+                purchase_notes = #{purchaseNotes},
+            </if>
+            <if test="deliverOrProductTime != null">
+                deliver_or_product_time = #{deliverOrProductTime},
+            </if>
+            <if test="expectArrivalTimeCountdown != null">
+                expect_arrival_time_countdown = #{expectArrivalTimeCountdown},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="batchUpdatePlanAuxiliary">
+        <foreach collection="list" item="item" separator=";">
+            UPDATE procurement_needs
+            SET plan_auxiliary_id = #{item.planAuxiliaryId}
+            WHERE id = #{item.id}
+        </foreach>
+    </update>
+
+</mapper>
